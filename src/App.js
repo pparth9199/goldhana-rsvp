@@ -15,6 +15,7 @@ function App() {
 
     const response = await fetch("https://script.google.com/macros/s/AKfycbxTOrmqSmJ687idXWxnoZ7i4NluA9_IocQj-ZP9z2zHOt3I0l1w1lbLWXcjyk1M49s/exec", {
       method: "POST",
+      redirect: "follow",
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,15 +24,10 @@ function App() {
         fullName,
         attendance,
       }),
+      mode: "no-cors",
     });
-
-    if (response.ok) {
-      setSubmitted(true);
-      setName("");
-      setFullName("");
-    } else {
-      alert("There was an error submitting your RSVP. Please try again.");
-    }
+    console.log(response);
+    alert("RSVP Submitted if your answer changes please submit the form again! We look forward to celebrate the special day with you! ");
   };
 
   return (
@@ -41,7 +37,7 @@ function App() {
         <Grid
           item
           xs={12}
-          md={7}
+          md={5}
           sx={{
             backgroundImage: "url(/cover.jpg)",
             backgroundSize: "cover",
@@ -51,7 +47,7 @@ function App() {
         <Grid
           item
           xs={12}
-          md={5}
+          md={7}
           sx={{
             display: "flex",
             alignItems: "center",
@@ -71,8 +67,8 @@ function App() {
             </Typography>
             {!submitted ? (
               <Box component="form" onSubmit={handleSubmit} noValidate>
-                <TextField label="Name" variant="outlined" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required />
-                <TextField label="Full Name" variant="outlined" fullWidth margin="normal" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+                <TextField label="First Name" variant="outlined" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required />
+                <TextField label="Last Name" variant="outlined" fullWidth margin="normal" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
                 <Typography variant="body1" sx={{ margin: "20px 0 10px", color: "#2d3748" }}>
                   Will you be attending?
                 </Typography>
