@@ -9,9 +9,20 @@ function App() {
   const [fullName, setFullName] = useState("");
   const [attendance, setAttendance] = useState("yes");
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({ name: false, fullName: false });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = {
+      name: !name.trim(),
+      fullName: !fullName.trim(),
+    };
+    setErrors(newErrors);
+
+    if (newErrors.name || newErrors.fullName) {
+      return;
+    }
 
     const response = await fetch("https://script.google.com/macros/s/AKfycbxTOrmqSmJ687idXWxnoZ7i4NluA9_IocQj-ZP9z2zHOt3I0l1w1lbLWXcjyk1M49s/exec", {
       method: "POST",
@@ -30,6 +41,7 @@ function App() {
     setSubmitted(true);
     setName("");
     setFullName("");
+    setErrors({ name: false, fullName: false });
   };
 
   return (
@@ -75,8 +87,28 @@ function App() {
             </Typography>
             {!submitted ? (
               <Box component="form" onSubmit={handleSubmit} noValidate>
-                <TextField label="First Name" variant="outlined" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} required />
-                <TextField label="Last Name" variant="outlined" fullWidth margin="normal" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+                <TextField
+                  label="First Name"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  error={errors.name}
+                  helperText={errors.name ? "Please enter your first name." : ""}
+                  required
+                />
+                <TextField
+                  label="Last Name"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  error={errors.fullName}
+                  helperText={errors.fullName ? "Please enter your last name." : ""}
+                  required
+                />
                 <Typography variant="body1" sx={{ margin: "20px 0 10px", color: "#2d3748" }}>
                   Will you be attending?
                 </Typography>
@@ -99,8 +131,18 @@ function App() {
                 </Button>
               </Box>
             ) : (
-              <Typography variant="h6" sx={{ color: "#2d3748", marginTop: "20px" }}>
-                Thank you for your RSVP! We look forward to take the first step to forever with you. Please resubmit the form if anything changes.
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#2d3748",
+                  marginTop: "20px",
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                Thank you for your RSVP! <br /> <br /> We look forward to taking the first step to forever with you. <br /> <br /> Please re-submit the form if anything changes.
               </Typography>
             )}
           </Box>
