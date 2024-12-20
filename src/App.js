@@ -13,7 +13,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("https://script.google.com/macros/s/AKfycbw4-xwhk-FhGAOCd013qqsHsWrn11n-H6prHSVSK9i3Qy6aIRZPzM7vxciooalpDb4/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxTOrmqSmJ687idXWxnoZ7i4NluA9_IocQj-ZP9z2zHOt3I0l1w1lbLWXcjyk1M49s/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
