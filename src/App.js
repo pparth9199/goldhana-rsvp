@@ -100,7 +100,7 @@ function App() {
               </Box>
             ) : (
               <Typography variant="h6" sx={{ color: "#2d3748", marginTop: "20px" }}>
-                Thank you for your RSVP! We look forward to take the first to forever with you. Please resubmit the form if anything changes.
+                Thank you for your RSVP! We look forward to take the first step to forever with you. Please resubmit the form if anything changes.
               </Typography>
             )}
           </Box>
