@@ -28,6 +28,9 @@ function App() {
     });
     console.log(response);
     alert("RSVP Submitted if your answer changes please submit the form again! We look forward to celebrate the special day with you! ");
+    setSubmitted(true);
+    setName("");
+    setFullName("");
   };
 
   return (
